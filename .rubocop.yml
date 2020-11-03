@@ -1,0 +1,29 @@
+require: rubocop-performance
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.7
+
+Layout/LineLength:
+  Max: 160
+
+Metrics/AbcSize:
+  Max: 100
+Metrics/BlockLength:
+  Max: 40
+  Exclude:
+    - '*.gemspec'
+Metrics/CyclomaticComplexity:
+  Max: 20
+Metrics/MethodLength:
+  Max: 50
+Metrics/ParameterLists:
+  Max: 8
+Metrics/PerceivedComplexity:
+  Max: 12
+
+Naming/FileName:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
