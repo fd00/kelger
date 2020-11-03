@@ -34,7 +34,7 @@ module Kelger
       run(@input, @output)
     end
 
-    def run(input, _output)
+    def run(input, output)
       object = {
         repository_name: 'YACP',
         num_packages: 0
@@ -82,7 +82,9 @@ module Kelger
       end
       object[:timestamp] = Time.now.to_i
       object[:packages] = packages
-      puts JSON.dump(object)
+      File.open(output, 'w') do |f|
+        f.write(JSON.dump(object))
+      end
     end
   end
 end
