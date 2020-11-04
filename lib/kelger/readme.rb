@@ -27,7 +27,7 @@ module Kelger
         matched = line.match(/^\((.*)\)$/)
         subpackages << matched[1] unless matched.nil?
       end
-      { homepage: homepage, subpackages: subpackages }
+      { homepage: homepage.gsub(/\P{ASCII}/, ''), subpackages: subpackages }
     end
   end
 end

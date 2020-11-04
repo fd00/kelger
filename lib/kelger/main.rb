@@ -40,18 +40,18 @@ module Kelger
         num_packages: 0
       }
       packages = []
-      Dir.open(input).sort.each do |package|
-        next if package.start_with?('.') # skip '.', '..', '.git'
-        next if package.end_with?('.md') # skip markdown
+      Dir.open(input).sort.each do |package_name|
+        next if package_name.start_with?('.') # skip '.', '..', '.git'
+        next if package_name.end_with?('.md') # skip markdown
 
-        packagedir = Dir.open(File.join(input, package))
+        packagedir = Dir.open(File.join(input, package_name))
         package = {}
         Dir.chdir(packagedir) do
           cygport = Dir.glob('*.cygport')
           next if cygport.empty?
 
           cygport = cygport[0]
-          pnv = cygport.gsub(/-[0-9]+bl[0-9]+\.cygport$/, '').gsub(/\+(hg|git|svn).+$/, '').gsub(/-(alpha|beta|pre|r|rc)[0-9]*/, '')
+          pnv = cygport.gsub(/-[0-9]+bl[0-9]+\.cygport$/, '').gsub(/\+(hg|git|svn).+$/, '').gsub(/-((alpha|beta|pre|r|rc)[0-9.]*)$/, '\1')
           matched = /(.*)-(.*)/.match(pnv)
           name = matched[1]
           version = matched[2]
@@ -77,7 +77,7 @@ module Kelger
           end
           package[:maintainers] = ['Daisuke Fujimura']
         end
-        packages << package
+        packages << package unless package.empty?
         object[:num_packages] += 1 # count packages
       end
       object[:timestamp] = Time.now.to_i
