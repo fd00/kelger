@@ -63,6 +63,7 @@ module Kelger
             matched = /SUMMARY="([^"$]+)"/.match(line)
             summary = matched[1] unless matched.nil?
           end
+          name.gsub!(/^ros-/, 'ros:')
           package[:name] = name
           package[:version] = version
           package[:category] = category.nil? ? [] : category.split(' ')
