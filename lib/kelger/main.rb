@@ -51,7 +51,7 @@ module Kelger
           next if cygport.empty?
 
           cygport = cygport[0]
-          pnv = cygport.gsub(/-[0-9]+bl[0-9]+\.cygport$/, '').gsub(/\+(hg|git|svn).+$/, '').gsub(/-((alpha|beta|pre|r|rc)[0-9.]*)$/, '\1')
+          pnv = cygport.gsub(/-[0-9]+bl[0-9]+\.cygport$/, '').gsub(/\+(hg|git|svn).+$/, '').gsub(/-((alpha|beta|pre|p|r|rc)[0-9.]*)$/, '\1')
           matched = /(.*)-(.*)/.match(pnv)
           name = matched[1]
           version = matched[2]
